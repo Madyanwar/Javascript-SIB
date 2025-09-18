@@ -9,33 +9,25 @@
   <h2>Menghitung Luas Persegi Panjang, Bujur Sangkar, dan Segitiga</h2>
 
   <script>
-    // Fungsi untuk menghitung luas persegi panjang, rumus nya = panjang * lebar
-    function luasPersegiPanjang(panjang, lebar) {
-      return panjang * lebar;
-    }
+    // Luas Persegi Panjang
+    let panjang = 10; // nilai panjang
+    let lebar = 5;    // nilai lebar
+    let luasPersegiPanjang = panjang * lebar; // rumus: panjang × lebar
+    document.write("Diketahui Panjang " + panjang + "cm dan lebar adalah "+ lebar
+    +"cm, Maka Luas Persegi panjang adalah: " + luasPersegiPanjang + "cm <br>");
 
-    // Fungsi untuk menghitung luas bujur sangkar, rumusnya = sisi * sisi
-    function luasBujurSangkar(sisi) {
-      return sisi * sisi;
-    }
+    // Luas Bujur Sangkar
+    let sisi = 6; // nilai sisi
+    let luasBujurSangkar = sisi * sisi; // rumus: sisi × sisi
+    document.write("Diketahui nilai sisi bujur sangkar adalah:  "+ sisi + 
+    "cm, Maka luas bujur sangkar adalah: " + luasBujurSangkar + "cm <br>");
 
-    // Fungsi untuk menghitung luas segitiga, rumusnya = 1/2 * alas * tinggi
-    function luasSegitiga(alas, tinggi) {
-      return 0.5 * alas * tinggi;
-    }
-
-    // value atau nilai
-    let panjang = 10;
-    let lebar = 5;
-    let sisi = 7;
-    let alas = 8;
-    let tinggi = 6;
-
-    // Menampilkan hasil perhitungan tersebut ke halaman web
-    document.write("<b>Hasil Perhitungan:</b><br>");
-    document.write("Luas Persegi Panjang (" + panjang + " x " + lebar + ") = " + luasPersegiPanjang(panjang, lebar) + "<br>");
-    document.write("Luas Bujur Sangkar (sisi " + sisi + ") = " + luasBujurSangkar(sisi) + "<br>");
-    document.write("Luas Segitiga (alas " + alas + " x tinggi " + tinggi + ") = " + luasSegitiga(alas, tinggi) + "<br>");
+    // Luas Segitiga
+    let alas = 8;   // nilai alas
+    let tinggi = 12; // nilai tinggi
+    let luasSegitiga = (alas * tinggi) / 2; // rumus: 1/2 × alas × tinggi
+    document.write("Diketahui Alas " + alas + "cm dan tinggi "+ tinggi + "cm, Maka Luas segitiga adalah " 
+    + luasSegitiga + "cm <br>");
   </script>
 </body>
 
