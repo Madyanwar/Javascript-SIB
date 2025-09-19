@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <title>Data Pegawai</title>
+  <style>
+    table {
+      border-collapse: collapse;
+      width: 70%;
+      margin: 20px auto;
+    }
+    th, td {
+      border: 1px solid #333;
+      padding: 8px 12px;
+      text-align: center;
+    }
+    thead {
+      background-color: #ddd;
+    }
+    tfoot {
+      background-color: #f2f2f2;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+  <h2 style="text-align:center;">Data Pegawai</h2>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Nama Pegawai</th>
+        <th>Umur</th>
+        <th>Jabatan</th>
+        <th>Status</th>
+        <th>Gaji Pokok</th>
+        <th>Tunjangan Jabatan</th>
+        <th>BPJS</th>
+        <th>Tunjangan Keluarga</th>
+      </tr>
+    </thead>
+    <tbody id="datapegawai">
+    </tbody>
+    <tfoot>
+      <tr>
+        <td colspan="7">Total Gaji</td>
+        <!-- id untuk memanggil semua perhitungan total gaji ke tabel-->
+        <td id="totalgaji"></td> 
+      </tr>
+    </tfoot>
+  </table>
+
+  <script>
+    // data pegawai lewai prompt input
+    let nama = prompt("Masukkan nama pegawai:");
+    let umur = prompt("Masukkan umur pegawai:");
+    let jabatan = prompt("Masukkan jabatan (Manajer / Asisten Manajer / Staff):");
+    let status = prompt("Masukkan status (menikah / belum menikah):");
+
+    // hitungan gaji pokok 
+    let gajiPokok = 0;
+    if (jabatan.toLowerCase() === "manajer") {
+      gajiPokok = 15000000;
+    } else if (jabatan.toLowerCase() === "asisten manajer") {
+      gajiPokok = 10000000;
+    } else if (jabatan.toLowerCase() === "staff") {
+      gajiPokok = 5000000;
+    }
+
+    // hitungan tunjangan dari 15% gaji poko pegawai
+    let tunjanganJabatan = 0.15 * gajiPokok;
+
+    // tunjangan BPJS dari 10% gaji pokok
+    let bpjs = 0.10 * gajiPokok;
+
+    // tunjangan keluarga dengan hitungan pakai ternary operator
+    let tunjanganKeluarga = (status.toLowerCase() === "menikah") ? 0.20 * gajiPokok : 0;
+
+    // mengihitung semua total gaji
+    let totalGaji = gajiPokok + tunjanganJabatan + bpjs + tunjanganKeluarga;
+
+    // menampilkan tabel 
+    let tbody = document.getElementById("datapegawai");
+    tbody.innerHTML = `
+      <tr>
+        <td>${nama}</td>
+        <td>${umur}</td>
+        <td>${jabatan}</td>
+        <td>${status}</td>
+        <td>Rp ${gajiPokok.toLocaleString()}</td>
+        <td>Rp ${tunjanganJabatan.toLocaleString()}</td>
+        <td>Rp ${bpjs.toLocaleString()}</td>
+        <td>Rp ${tunjanganKeluarga.toLocaleString()}</td>
+      </tr>
+    `;
+      // toLocalString untuk konversi nilai mau itu angka atau apa ke string sesuai pengaturan lokal
+    document.getElementById("totalgaji").innerText = "Rp " + totalGaji.toLocaleString();
+  </script>
+</body>
+</html>
