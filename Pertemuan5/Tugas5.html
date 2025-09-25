@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <title>Manajemen Produk Awar Printing</title>
+</head>
+<body>
+  <h2>Daftar Produk</h2>
+  <ul id="produkList"></ul>
+
+  <h3>Tambah Produk</h3>
+  <input type="number" id="idProduk" placeholder="ID">
+  <input type="text" id="namaProduk" placeholder="Nama Produk">
+  <input type="number" id="hargaProduk" placeholder="Harga">
+  <button id="btnTambah">Tambah Produk</button>
+
+  <h3>Tambah Banyak Produk dengan Rest Parameter</h3>
+  <button id="btnTambahBanyak">Tambah 2 Produk Sekaligus</button>
+
+  <script>
+    // data produk
+    let produk = [
+      { id: 1, nama: "Laptop", harga: 12000000 },
+      { id: 2, nama: "Smartphone", harga: 5000000 },
+      { id: 3, nama: "Tablet", harga: 4000000 },
+      { id: 4, nama: "Headphone", harga: 3000000 },
+      { id: 5, nama: "Smartwatch", harga: 1500000 }
+    ];
+
+    // fungsi tampilkan produk pakai destructuring
+    function tampilkanProduk() {
+      const list = document.getElementById("produkList");
+      list.innerHTML = "";
+      produk.forEach(({ id, nama, harga }, index) => {
+        const li = document.createElement("li");
+        li.textContent = `ID: ${id} | ${nama} - Rp${harga}`;
+
+        // hapus produk
+        const btnHapus = document.createElement("button");
+        btnHapus.textContent = " Hapus";
+        btnHapus.addEventListener("click", () => hapusProduk(index));
+
+        li.appendChild(btnHapus);
+        list.appendChild(li);
+      });
+    }
+
+    // fungsi tambah produk pakai spread operator
+    function tambahProduk(id, nama, harga) {
+      const produkBaru = { id, nama, harga };
+      produk = [...produk, produkBaru];
+      tampilkanProduk();
+    }
+
+    // fungsi tambah banyak produk sekaligus pakai rest parameter
+    function tambahBanyakProduk(...produkBaru) {
+      produk = [...produk, ...produkBaru];
+      tampilkanProduk();
+    }
+
+    // hapus produk
+    function hapusProduk(index) {
+      produk.splice(index, 1);
+      tampilkanProduk();
+    }
+
+    // Event Listener
+    const eventHandler = () => {
+      const id = parseInt(document.getElementById("idProduk").value);
+      const nama = document.getElementById("namaProduk").value;
+      const harga = parseInt(document.getElementById("hargaProduk").value);
+
+      if (id && nama && harga) {
+        tambahProduk(id, nama, harga);
+        document.getElementById("idProduk").value = "";
+        document.getElementById("namaProduk").value = "";
+        document.getElementById("hargaProduk").value = "";
+      } else {
+        alert("Isi semua field terlebih dahulu!");
+      }
+    };
+
+    document.getElementById("btnTambah").addEventListener("click", eventHandler);
+
+    // Tombol untuk tambah banyak produk sekaligus
+    document.getElementById("btnTambahBanyak").addEventListener("click", () => {
+      tambahBanyakProduk(
+        { id: 6, nama: "Camera", harga: 5500000 },
+        { id: 7, nama: "Printer", harga: 4600000 }
+      );
+    });
+
+    // tampilkan produk awal
+    tampilkanProduk();
+  </script>
+</body>
+</html>
